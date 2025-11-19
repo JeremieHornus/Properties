@@ -2,6 +2,7 @@
 from __future__ import print_function
 
 from vanilla import *
+from AppKit import *
 from defconAppKit.windows.baseWindow import BaseWindowController
 from mojo.events import addObserver, removeObserver
 from mojo.extensions import getExtensionDefault, setExtensionDefault
@@ -20,6 +21,7 @@ def toggleObserverVisibility():
 	print("show properties: " + str(state))
 	setExtensionDefault(defaultKeyObserverVisibility, state)
 
+
 class ShowPropertiesTextBox(TextBox):
 	def __init__(self, viewID, *args, **kwargs):
 		super(ShowPropertiesTextBox, self).__init__(*args, **kwargs)
@@ -35,6 +37,7 @@ class ShowPropertiesTextBox(TextBox):
 		else:
 			addObserver(self, "draw", "keyUp")
 		addObserver(self, "glyphWindowWillClose", "glyphWindowWillClose")
+		self.getNSTextField().setTextColor_(NSColor.redColor())
 		self.cachedPoints = {}
 		self.viewID = viewID
 
